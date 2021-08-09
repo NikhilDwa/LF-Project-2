@@ -28,4 +28,12 @@ for index, value in enumerate( new_data_array[0] ):
     print(index, value)
 
 """### Data type conversion"""
+print(new_data_array[1:, 5])
 
+array = np.array([])
+for i in new_data_array[1:, 5]: 
+    array = np.append(array, i[1:-1])
+
+print(array)
+
+new_data_array[1:, 5] = array
