@@ -77,3 +77,52 @@ plt.ylim(min_price , max_price )
 plt.scatter(x=x, y=all_price,alpha=0.15)
 plt.hlines(y=mean_price, xmin=0, xmax=len(new_data_array[1:,0]), colors='r')
 plt.show()
+
+#Outlier removal using percentile.
+
+max_thresold = np.percentile(all_price, 99)
+min_threshold = np.percentile(all_price, 1)
+
+print(max_thresold, min_threshold)
+
+all_price_no_outliers = []
+for y in all_price.tolist():
+    if y >= min_threshold and y <= max_thresold:
+        all_price_no_outliers.append(y)
+
+print("outlier percentage : ", (len(all_price)-len(all_price_no_outliers))/len(all_price) * 100)
+
+count_price = np.count_nonzero(all_price_no_outliers)
+mean_price = np.mean(all_price_no_outliers)
+std_price = np.std(all_price_no_outliers)
+min_price = min(all_price_no_outliers)
+max_price = max(all_price_no_outliers)
+_25_price = np.percentile(all_price_no_outliers, 25)
+_50_price = np.percentile(all_price_no_outliers, 50)
+_75_price = np.percentile(all_price_no_outliers, 75)
+lt_mean_price = np.count_nonzero(all_price_no_outliers < _50_price) # how many values less than mean
+gte_mean_price = np.count_nonzero(all_price_no_outliers >= _50_price) #how many values greater than or equal to mean
+iqr = _75_price - _25_price # inter-quartile range
+rng = max_price - min_price # range of data
+
+print(count_price)
+print(mean_price)
+print(std_price)
+print(min_price)
+print(max_price)
+print(_25_price)
+print(_50_price)
+print(_75_price)
+print(lt_mean_price)
+print(gte_mean_price)
+print(iqr)
+
+x = [i for i in range(len(all_price_no_outliers))]
+
+plt.title("county price")
+plt.ylim(min_price , max_price )
+plt.scatter(x=x, y=all_price_no_outliers,alpha=0.15)
+plt.hlines(y=mean_price, xmin=0, xmax=len(all_price_no_outliers), colors='r')
+plt.show()
+
+print(new_data_array[0], len(new_data_array[0]))
