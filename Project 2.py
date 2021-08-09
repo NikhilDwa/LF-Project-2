@@ -22,3 +22,10 @@ new_data_array = np.delete(data_array, [0, 1, 14, 15, 16, 17, 18, 19, 20], axis=
 
 print(new_data_array[0])
 
+"""### Fetching the new indexes"""
+
+for index, value in enumerate( new_data_array[0] ):
+    print(index, value)
+
+"""### Data type conversion"""
+
