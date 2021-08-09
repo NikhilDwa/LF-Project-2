@@ -228,3 +228,5 @@ for i in range(0,12):
     # print(i,j)
         new_array[i+1][j+1] = stat[new_array[0][j+1]][new_array[i+1][0]]
 
+#the final result
+print(new_array)
